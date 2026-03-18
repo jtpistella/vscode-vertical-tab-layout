@@ -13,7 +13,7 @@ class TabItem extends vscode.TreeItem {
             this.resourceUri = uri;
             this.tooltip = uri.fsPath;
             this.command = {
-                command: 'tabsOnLeft.openTab',
+                command: 'verticalTabs.openTab',
                 title: 'Open Tab',
                 arguments: [uri, tab]
             };
@@ -89,7 +89,7 @@ class TabsProvider implements vscode.TreeDataProvider<TabItem> {
 export function activate(context: vscode.ExtensionContext) {
     const provider = new TabsProvider();
 
-    const treeView = vscode.window.createTreeView('tabsOnLeft', {
+    const treeView = vscode.window.createTreeView('verticalTabs', {
         treeDataProvider: provider,
         showCollapseAll: false
     });
@@ -98,7 +98,7 @@ export function activate(context: vscode.ExtensionContext) {
     const tabChange = vscode.window.tabGroups.onDidChangeTabs(() => provider.refresh());
 
     const openTabCmd = vscode.commands.registerCommand(
-        'tabsOnLeft.openTab',
+        'verticalTabs.openTab',
         async (uri: vscode.Uri, tab: vscode.Tab) => {
             try {
                 if (uri) {
@@ -114,29 +114,29 @@ export function activate(context: vscode.ExtensionContext) {
         }
     );
 
-    const pinTabCmd = vscode.commands.registerCommand('tabsOnLeft.pinTab', async (item: TabItem) => {
+    const pinTabCmd = vscode.commands.registerCommand('verticalTabs.pinTab', async (item: TabItem) => {
         if (!item || !item.uri) return;
         await vscode.window.showTextDocument(item.uri, { preview: false, preserveFocus: false });
         await vscode.commands.executeCommand('workbench.action.pinEditor');
     });
 
-    const unpinTabCmd = vscode.commands.registerCommand('tabsOnLeft.unpinTab', async (item: TabItem) => {
+    const unpinTabCmd = vscode.commands.registerCommand('verticalTabs.unpinTab', async (item: TabItem) => {
         if (!item || !item.uri) return;
         await vscode.window.showTextDocument(item.uri, { preview: false, preserveFocus: false });
         await vscode.commands.executeCommand('workbench.action.unpinEditor');
     });
 
-    const closeTabCmd = vscode.commands.registerCommand('tabsOnLeft.closeTab', async (item: TabItem) => {
+    const closeTabCmd = vscode.commands.registerCommand('verticalTabs.closeTab', async (item: TabItem) => {
         if (!item) return;
         await vscode.window.tabGroups.close(item.tab);
     });
 
-    const closeAllTabsCmd = vscode.commands.registerCommand('tabsOnLeft.closeAllTabs', async () => {
+    const closeAllTabsCmd = vscode.commands.registerCommand('verticalTabs.closeAllTabs', async () => {
         const allTabs = vscode.window.tabGroups.all.flatMap(g => g.tabs);
         await vscode.window.tabGroups.close(allTabs);
     });
 
-    const closeOtherTabsCmd = vscode.commands.registerCommand('tabsOnLeft.closeOtherTabs', async (item: TabItem) => {
+    const closeOtherTabsCmd = vscode.commands.registerCommand('verticalTabs.closeOtherTabs', async (item: TabItem) => {
         if (!item) return;
         const others = vscode.window.tabGroups.all
             .flatMap(g => g.tabs)
@@ -144,14 +144,14 @@ export function activate(context: vscode.ExtensionContext) {
         await vscode.window.tabGroups.close(others);
     });
 
-    const closeAllButPinnedCmd = vscode.commands.registerCommand('tabsOnLeft.closeAllButPinned', async () => {
+    const closeAllButPinnedCmd = vscode.commands.registerCommand('verticalTabs.closeAllButPinned', async () => {
         const unpinned = vscode.window.tabGroups.all
             .flatMap(g => g.tabs)
             .filter(t => !t.isPinned);
         await vscode.window.tabGroups.close(unpinned);
     });
 
-    const refreshCmd = vscode.commands.registerCommand('tabsOnLeft.refresh', () => {
+    const refreshCmd = vscode.commands.registerCommand('verticalTabs.refresh', () => {
         provider.refresh();
     });
 

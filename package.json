@@ -1,7 +1,7 @@
 {
-  "name": "tabs-on-left",
-  "displayName": "Tabs on Left",
-  "description": "Shows all open tabs sorted alphabetically in the sidebar, like Visual Studio's Place Tabs on Left.",
+  "name": "vertical-tab-layout",
+  "displayName": "Vertical Tab Layout",
+  "description": "Shows all open tabs sorted alphabetically in the sidebar as a vertical list.",
   "version": "0.2.0",
   "publisher": "local",
   "engines": {
@@ -14,7 +14,7 @@
     "views": {
       "explorer": [
         {
-          "id": "tabsOnLeft",
+          "id": "verticalTabs",
           "name": "Open Tabs",
           "icon": "$(list-unordered)",
           "when": "true"
@@ -23,85 +23,85 @@
     },
     "commands": [
       {
-        "command": "tabsOnLeft.refresh",
+        "command": "verticalTabs.refresh",
         "title": "Refresh",
         "icon": "$(refresh)"
       },
       {
-        "command": "tabsOnLeft.pinTab",
+        "command": "verticalTabs.pinTab",
         "title": "Pin Tab",
         "icon": "$(pin)"
       },
       {
-        "command": "tabsOnLeft.unpinTab",
+        "command": "verticalTabs.unpinTab",
         "title": "Unpin Tab",
         "icon": "$(pinned)"
       },
       {
-        "command": "tabsOnLeft.closeTab",
+        "command": "verticalTabs.closeTab",
         "title": "Close",
         "icon": "$(close)"
       },
       {
-        "command": "tabsOnLeft.closeAllTabs",
+        "command": "verticalTabs.closeAllTabs",
         "title": "Close All Tabs"
       },
       {
-        "command": "tabsOnLeft.closeOtherTabs",
+        "command": "verticalTabs.closeOtherTabs",
         "title": "Close Other Tabs"
       },
       {
-        "command": "tabsOnLeft.closeAllButPinned",
+        "command": "verticalTabs.closeAllButPinned",
         "title": "Close All But Pinned"
       }
     ],
     "menus": {
       "view/title": [
         {
-          "command": "tabsOnLeft.refresh",
-          "when": "view == tabsOnLeft",
+          "command": "verticalTabs.refresh",
+          "when": "view == verticalTabs",
           "group": "navigation"
         }
       ],
       "view/item/context": [
         {
-          "command": "tabsOnLeft.pinTab",
-          "when": "view == tabsOnLeft && viewItem == tabItem",
+          "command": "verticalTabs.pinTab",
+          "when": "view == verticalTabs && viewItem == tabItem",
           "group": "inline@1"
         },
         {
-          "command": "tabsOnLeft.unpinTab",
-          "when": "view == tabsOnLeft && viewItem == tabItemPinned",
+          "command": "verticalTabs.unpinTab",
+          "when": "view == verticalTabs && viewItem == tabItemPinned",
           "group": "inline@1"
         },
         {
-          "command": "tabsOnLeft.closeTab",
-          "when": "view == tabsOnLeft",
+          "command": "verticalTabs.closeTab",
+          "when": "view == verticalTabs",
           "group": "inline@2"
         },
         {
-          "command": "tabsOnLeft.pinTab",
-          "when": "view == tabsOnLeft && viewItem == tabItem",
+          "command": "verticalTabs.pinTab",
+          "when": "view == verticalTabs && viewItem == tabItem",
           "group": "1_pin@1"
         },
         {
-          "command": "tabsOnLeft.unpinTab",
-          "when": "view == tabsOnLeft && viewItem == tabItemPinned",
+          "command": "verticalTabs.unpinTab",
+          "when": "view == verticalTabs && viewItem == tabItemPinned",
           "group": "1_pin@1"
         },
         {
-          "command": "tabsOnLeft.closeAllTabs",
-          "when": "view == tabsOnLeft",
+          "command": "verticalTabs.closeAllTabs",
+          "when": "view == verticalTabs",
           "group": "3_closeMulti@1"
         },
         {
-          "command": "tabsOnLeft.closeOtherTabs",
-          "when": "view == tabsOnLeft",
+          "command": "verticalTabs.closeOtherTabs",
+          "when": "view == verticalTabs",
           "group": "3_closeMulti@2"
         },
         {
-          "command": "tabsOnLeft.closeAllButPinned",
-          "when": "view == tabsOnLeft",
+          "command": "verticalTabs.closeAllButPinned",
+          "when": "view == verticalTabs",
           "group": "3_closeMulti@3"
         }
       ]
