@@ -1,0 +1,121 @@
+{
+  "name": "tabs-on-left",
+  "displayName": "Tabs on Left",
+  "description": "Shows all open tabs sorted alphabetically in the sidebar, like Visual Studio's Place Tabs on Left.",
+  "version": "0.2.0",
+  "publisher": "local",
+  "engines": {
+    "vscode": "^1.71.0"
+  },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "views": {
+      "explorer": [
+        {
+          "id": "tabsOnLeft",
+          "name": "Open Tabs",
+          "icon": "$(list-unordered)",
+          "when": "true"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "tabsOnLeft.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "tabsOnLeft.pinTab",
+        "title": "Pin Tab",
+        "icon": "$(pin)"
+      },
+      {
+        "command": "tabsOnLeft.unpinTab",
+        "title": "Unpin Tab",
+        "icon": "$(pinned)"
+      },
+      {
+        "command": "tabsOnLeft.closeTab",
+        "title": "Close",
+        "icon": "$(close)"
+      },
+      {
+        "command": "tabsOnLeft.closeAllTabs",
+        "title": "Close All Tabs"
+      },
+      {
+        "command": "tabsOnLeft.closeOtherTabs",
+        "title": "Close Other Tabs"
+      },
+      {
+        "command": "tabsOnLeft.closeAllButPinned",
+        "title": "Close All But Pinned"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "tabsOnLeft.refresh",
+          "when": "view == tabsOnLeft",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "tabsOnLeft.pinTab",
+          "when": "view == tabsOnLeft && viewItem == tabItem",
+          "group": "inline@1"
+        },
+        {
+          "command": "tabsOnLeft.unpinTab",
+          "when": "view == tabsOnLeft && viewItem == tabItemPinned",
+          "group": "inline@1"
+        },
+        {
+          "command": "tabsOnLeft.closeTab",
+          "when": "view == tabsOnLeft",
+          "group": "inline@2"
+        },
+        {
+          "command": "tabsOnLeft.pinTab",
+          "when": "view == tabsOnLeft && viewItem == tabItem",
+          "group": "1_pin@1"
+        },
+        {
+          "command": "tabsOnLeft.unpinTab",
+          "when": "view == tabsOnLeft && viewItem == tabItemPinned",
+          "group": "1_pin@1"
+        },
+        {
+          "command": "tabsOnLeft.closeAllTabs",
+          "when": "view == tabsOnLeft",
+          "group": "3_closeMulti@1"
+        },
+        {
+          "command": "tabsOnLeft.closeOtherTabs",
+          "when": "view == tabsOnLeft",
+          "group": "3_closeMulti@2"
+        },
+        {
+          "command": "tabsOnLeft.closeAllButPinned",
+          "when": "view == tabsOnLeft",
+          "group": "3_closeMulti@3"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.71.0",
+    "@types/node": "^18.0.0",
+    "typescript": "^5.0.0",
+    "@vscode/vsce": "^2.0.0"
+  }
+}
